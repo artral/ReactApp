@@ -1,4 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import App from './App.jsx';
-ReactDOM.render(<App/>, document.getElementById('app'));
+import AppStateEx from './AppState.jsx';
+ReactDOM.render(<AppStateEx/>, document.getElementById('app'));
