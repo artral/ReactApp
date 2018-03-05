@@ -168,7 +168,7 @@ class ReferenceComponent extends React.Component {
     render() {
         return (
             <div>
-                <input value={this.state.data} onChange={this.updateState} ref="myInput"/> 
+                <input value={this.state.data} onChange={this.updateState} ref="myInput" />
                 <h4>{this.state.data}</h4>
                 <button onClick={this.clearInput}>CLEAR</button>
             </div>
@@ -176,4 +176,41 @@ class ReferenceComponent extends React.Component {
         )
     }
 }
-export default ReferenceComponent;
+class DynamicComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state =
+            {
+                data :
+                [
+                    { color: 'yellow', id: 5 }, { color: 'red', id: 2 }, { color: 'blue', id: 3 }, { color: 'orange', id: 4 }, 
+                ]
+            }
+
+
+    }
+    render() {
+        return (
+            <div>
+                {this.state.data.map((dynamiccomponent, i) => <RowComponent key={i} componentData={dynamiccomponent}   /> )}
+            </div>
+        )
+    }
+}
+
+class RowComponent extends React.Component {
+    render() {
+        return (
+            <div>
+                <div> {this.props.componentData.key} </div>
+                <div> {this.props.componentData.color} </div>
+                <div> {this.props.componentData.id} </div>
+            </div>
+        );
+    }
+}
+
+
+
+export default DynamicComponent;
