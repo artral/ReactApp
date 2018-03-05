@@ -102,16 +102,31 @@ class AppFormData1 extends React.Component {
             data: 'AppFormData'
         }
         this.updateStateData = this.updateStateData.bind(this);
+        this.buttonClickHandler = this.buttonClickHandler.bind(this);
+        this.childButtonClickHandler = this.childButtonClickHandler.bind(this);
     };
     updateStateData(e) {
 
         this.setState({ data: e.target.value });
     };
+    buttonClickHandler(e) {
+
+        this.setState({
+            data: 'buttonClickHandler'
+        });
+    };
+    childButtonClickHandler(e) {
+
+        this.setState({
+            data: 'buttonClickHandler....childButtonClickHandler'
+        });
+    };
     render() {
         return (
             <div>
                 <h2> Parent Value: {this.state.data} </h2>
-                <Content myDataProp={this.state.data} updateStateProp={this.updateStateData} />
+                <button onClick={this.buttonClickHandler}> Button </button>
+                <Content myDataProp={this.state.data} updateStateProp={this.updateStateData} clickEvent={this.childButtonClickHandler} />
             </div>
 
         );
@@ -124,11 +139,41 @@ class Content extends React.Component {
                 <input type="text" defaultValue={this.props.myDataProp}
                     onChange={this.props.updateStateProp} />
                 <h3>{this.props.myDataProp}</h3>
+                <button onClick={this.props.clickEvent}> ChildComponent</button>
                 <h1>weeeeeeeeeeeeeee</h1>
-               
+
             </div>
         )
     }
 }
 
-export default AppFormData1;
+class ReferenceComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: 'gelo',
+        }
+        this.updateState = this.updateState.bind(this);
+        this.clearInput = this.clearInput.bind(this);
+    };
+    updateState(e) {
+        this.setState({ data: 'updateState' });
+    }
+    clearInput(e) {
+        this.setState({ data: 'cleared' });
+        ReactDOM.findDOMNode(this.refs.myInput).focus();
+    }
+    render() {
+        return (
+            <div>
+                <input value={this.state.data} onChange={this.updateState} ref="myInput"/> 
+                <h4>{this.state.data}</h4>
+                <button onClick={this.clearInput}>CLEAR</button>
+            </div>
+
+        )
+    }
+}
+export default ReferenceComponent;
