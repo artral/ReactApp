@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types'
 import ReactDOM from 'react-dom';
-
+import { Route, Router, Link, browserHistory, IndexRoute } from 'react-router';
 
 class Appstate1 extends React.Component {
     constructor() {
@@ -182,9 +182,9 @@ class DynamicComponent extends React.Component {
         super(props);
         this.state =
             {
-                data :
+                data:
                 [
-                    { color: 'yellow', id: 5 }, { color: 'red', id: 2 }, { color: 'blue', id: 3 }, { color: 'orange', id: 4 }, 
+                    { color: 'yellow', id: 5 }, { color: 'red', id: 2 }, { color: 'blue', id: 3 }, { color: 'orange', id: 4 },
                 ]
             }
 
@@ -193,7 +193,7 @@ class DynamicComponent extends React.Component {
     render() {
         return (
             <div>
-                {this.state.data.map((dynamiccomponent, i) => <RowComponent key={i} componentData={dynamiccomponent}   /> )}
+                {this.state.data.map((dynamiccomponent, i) => <RowComponent key={i} componentData={dynamiccomponent} />)}
             </div>
         )
     }
@@ -212,5 +212,64 @@ class RowComponent extends React.Component {
 }
 
 
+class AppRouter extends React.Component {
 
-export default DynamicComponent;
+    render() {
+        return (
+            <div>
+                <ul>
+                    <li> Home...</li>
+                    <li> About....</li>
+                    <li> Contact....</li>
+                </ul>
+                {this.props.Children}
+            </div>
+        )
+    }
+}
+export default AppRouter;
+
+class Home extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <ul>
+                    <li>
+                        <h1> Home </h1>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+}
+
+class About extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <ul>
+                    <li>
+                        <h1> ABout </h1>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+}
+
+class Contact extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <ul>
+                    <li>
+                        <h1> Contact </h1>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+}
